@@ -81,10 +81,14 @@ namespace Electronic
                             fileStream.Read(bytes, 0, bytes.Length);
                             gridToAdd = new SerializedGrid(Encoding.ASCII.GetString(bytes));
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            MessageBox.Show(ex.ToString());
+                            MessageBox.Show("Проверьте, присутствует ли Newtonsoft.Json.dll в папке программы", "Произошла ошибка при открытии файла");
                             gridLoaded = false;
+                        }
+                        finally
+                        {
+                            fileStream.Close();
                         }
                         gridLoaded = true;
                     }
@@ -208,30 +212,46 @@ namespace Electronic
             {
                 if ((fileStream = saveFileDialog.OpenFile()) != null)
                 {
-                    byte[] bytes = Encoding.ASCII.GetBytes(new SerializedGrid(grid).GetJsonSerialization());
-                    fileStream.Write(bytes, 0, bytes.Length);
-                    fileStream.Close();
-                    lastFileDirectory = saveFileDialog.FileName;
+                    try
+                    {
+                        byte[] bytes = Encoding.ASCII.GetBytes(new SerializedGrid(grid).GetJsonSerialization());
+                        fileStream.Write(bytes, 0, bytes.Length);
+                        lastFileDirectory = saveFileDialog.FileName;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Проверьте, присутствует ли Newtonsoft.Json.dll в папке программы", "Произошла ошибка при сохранении файла");
+                    }
+                    finally
+                    {
+                        fileStream.Close();
+                    }
                 }
+                fileSaved = true;
             }
-
-            fileSaved = true;
         }
 
         private void SaveFile(object sender, EventArgs e)
         {
-            if(!File.Exists(lastFileDirectory))
+            if (!File.Exists(lastFileDirectory))
             {
                 SaveAsFile(sender, e);
             }
             else
             {
-                using (Stream fileStream = File.Open(lastFileDirectory, FileMode.Create))
+                try
                 {
-                    byte[] bytes = Encoding.ASCII.GetBytes(new SerializedGrid(grid).GetJsonSerialization());
-                    fileStream.Write(bytes, 0, bytes.Length);
-                    fileStream.Close();
-                    fileSaved = true;
+                    using (Stream fileStream = File.Open(lastFileDirectory, FileMode.Create))
+                    {
+                        byte[] bytes = Encoding.ASCII.GetBytes(new SerializedGrid(grid).GetJsonSerialization());
+                        fileStream.Write(bytes, 0, bytes.Length);
+                        fileStream.Close();
+                        fileSaved = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Проверьте, присутствует ли Newtonsoft.Json.dll в папке программы", "Произошла ошибка при сохранении файла");
                 }
             }
         }

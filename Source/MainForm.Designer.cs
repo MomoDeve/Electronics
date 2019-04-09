@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainGrid = new System.Windows.Forms.PictureBox();
             this.gridContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SpeakerSelectButton = new System.Windows.Forms.RadioButton();
             this.FiltersLabel = new System.Windows.Forms.Label();
             this.NorElementSelectButton = new System.Windows.Forms.RadioButton();
             this.NandElementSelectButton = new System.Windows.Forms.RadioButton();
@@ -78,7 +80,6 @@
             this.WireSelectButton = new System.Windows.Forms.RadioButton();
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.MenuItems = new System.Windows.Forms.MenuStrip();
-            this.SpeakerSelectButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
             this.gridContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -164,6 +165,19 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Elements";
+            // 
+            // SpeakerSelectButton
+            // 
+            this.SpeakerSelectButton.AutoSize = true;
+            this.SpeakerSelectButton.Location = new System.Drawing.Point(6, 161);
+            this.SpeakerSelectButton.Name = "SpeakerSelectButton";
+            this.SpeakerSelectButton.Size = new System.Drawing.Size(65, 17);
+            this.SpeakerSelectButton.TabIndex = 14;
+            this.SpeakerSelectButton.TabStop = true;
+            this.SpeakerSelectButton.Tag = "Speaker";
+            this.SpeakerSelectButton.Text = "Speaker";
+            this.SpeakerSelectButton.UseVisualStyleBackColor = true;
+            this.SpeakerSelectButton.CheckedChanged += new System.EventHandler(this.ElementSelectButton_click);
             // 
             // FiltersLabel
             // 
@@ -709,19 +723,6 @@
             this.MenuItems.TabIndex = 4;
             this.MenuItems.Text = "menuStrip1";
             // 
-            // SpeakerSelectButton
-            // 
-            this.SpeakerSelectButton.AutoSize = true;
-            this.SpeakerSelectButton.Location = new System.Drawing.Point(6, 161);
-            this.SpeakerSelectButton.Name = "SpeakerSelectButton";
-            this.SpeakerSelectButton.Size = new System.Drawing.Size(65, 17);
-            this.SpeakerSelectButton.TabIndex = 14;
-            this.SpeakerSelectButton.TabStop = true;
-            this.SpeakerSelectButton.Tag = "Speaker";
-            this.SpeakerSelectButton.Text = "Speaker";
-            this.SpeakerSelectButton.UseVisualStyleBackColor = true;
-            this.SpeakerSelectButton.CheckedChanged += new System.EventHandler(this.ElementSelectButton_click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -730,6 +731,7 @@
             this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.MenuItems);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.MainMenuStrip = this.MenuItems;
             this.Name = "MainForm";
