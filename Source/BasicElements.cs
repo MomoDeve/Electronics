@@ -1,4 +1,7 @@
-﻿namespace Electronic
+﻿using System;
+using System.Threading.Tasks;
+
+namespace Electronic
 {
     class Bulb : QuadrupleElement
     {
@@ -7,6 +10,21 @@
         public override void RecieveEnergy(IElement element, RelativePosition elementPosition)
         {
             isOn = true;
+        }
+    }
+
+    class Speaker : QuadrupleElement
+    {
+        public override string imagePath => "speaker.png";
+
+        public override void RecieveEnergy(IElement element, RelativePosition elementPosition)
+        {
+            isOn = !isOn;
+            if(isOn)
+            {
+                Task.Run(() => Console.Beep());
+            }
+            
         }
     }
 

@@ -78,6 +78,7 @@
             this.WireSelectButton = new System.Windows.Forms.RadioButton();
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.MenuItems = new System.Windows.Forms.MenuStrip();
+            this.SpeakerSelectButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
             this.gridContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -133,6 +134,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.SpeakerSelectButton);
             this.groupBox1.Controls.Add(this.FiltersLabel);
             this.groupBox1.Controls.Add(this.NorElementSelectButton);
             this.groupBox1.Controls.Add(this.NandElementSelectButton);
@@ -166,7 +168,7 @@
             // FiltersLabel
             // 
             this.FiltersLabel.AutoSize = true;
-            this.FiltersLabel.Location = new System.Drawing.Point(3, 427);
+            this.FiltersLabel.Location = new System.Drawing.Point(4, 502);
             this.FiltersLabel.Name = "FiltersLabel";
             this.FiltersLabel.Size = new System.Drawing.Size(34, 13);
             this.FiltersLabel.TabIndex = 13;
@@ -175,7 +177,7 @@
             // NorElementSelectButton
             // 
             this.NorElementSelectButton.AutoSize = true;
-            this.NorElementSelectButton.Location = new System.Drawing.Point(6, 395);
+            this.NorElementSelectButton.Location = new System.Drawing.Point(7, 466);
             this.NorElementSelectButton.Name = "NorElementSelectButton";
             this.NorElementSelectButton.Size = new System.Drawing.Size(90, 17);
             this.NorElementSelectButton.TabIndex = 12;
@@ -188,7 +190,7 @@
             // NandElementSelectButton
             // 
             this.NandElementSelectButton.AutoSize = true;
-            this.NandElementSelectButton.Location = new System.Drawing.Point(6, 372);
+            this.NandElementSelectButton.Location = new System.Drawing.Point(7, 443);
             this.NandElementSelectButton.Name = "NandElementSelectButton";
             this.NandElementSelectButton.Size = new System.Drawing.Size(97, 17);
             this.NandElementSelectButton.TabIndex = 12;
@@ -201,7 +203,7 @@
             // DownFilterSelectButton
             // 
             this.DownFilterSelectButton.AutoSize = true;
-            this.DownFilterSelectButton.Location = new System.Drawing.Point(6, 512);
+            this.DownFilterSelectButton.Location = new System.Drawing.Point(6, 587);
             this.DownFilterSelectButton.Name = "DownFilterSelectButton";
             this.DownFilterSelectButton.Size = new System.Drawing.Size(78, 17);
             this.DownFilterSelectButton.TabIndex = 12;
@@ -214,7 +216,7 @@
             // UpFilterSelectButton
             // 
             this.UpFilterSelectButton.AutoSize = true;
-            this.UpFilterSelectButton.Location = new System.Drawing.Point(6, 489);
+            this.UpFilterSelectButton.Location = new System.Drawing.Point(6, 564);
             this.UpFilterSelectButton.Name = "UpFilterSelectButton";
             this.UpFilterSelectButton.Size = new System.Drawing.Size(64, 17);
             this.UpFilterSelectButton.TabIndex = 12;
@@ -227,7 +229,7 @@
             // LeftFilterSelectButton
             // 
             this.LeftFilterSelectButton.AutoSize = true;
-            this.LeftFilterSelectButton.Location = new System.Drawing.Point(6, 443);
+            this.LeftFilterSelectButton.Location = new System.Drawing.Point(6, 518);
             this.LeftFilterSelectButton.Name = "LeftFilterSelectButton";
             this.LeftFilterSelectButton.Size = new System.Drawing.Size(68, 17);
             this.LeftFilterSelectButton.TabIndex = 12;
@@ -240,7 +242,7 @@
             // RightFilterSelectButton
             // 
             this.RightFilterSelectButton.AutoSize = true;
-            this.RightFilterSelectButton.Location = new System.Drawing.Point(6, 466);
+            this.RightFilterSelectButton.Location = new System.Drawing.Point(6, 541);
             this.RightFilterSelectButton.Name = "RightFilterSelectButton";
             this.RightFilterSelectButton.Size = new System.Drawing.Size(75, 17);
             this.RightFilterSelectButton.TabIndex = 11;
@@ -253,7 +255,7 @@
             // EqElementSelectButton
             // 
             this.EqElementSelectButton.AutoSize = true;
-            this.EqElementSelectButton.Location = new System.Drawing.Point(6, 349);
+            this.EqElementSelectButton.Location = new System.Drawing.Point(7, 420);
             this.EqElementSelectButton.Name = "EqElementSelectButton";
             this.EqElementSelectButton.Size = new System.Drawing.Size(81, 17);
             this.EqElementSelectButton.TabIndex = 12;
@@ -266,7 +268,7 @@
             // XorElementSelectButton
             // 
             this.XorElementSelectButton.AutoSize = true;
-            this.XorElementSelectButton.Location = new System.Drawing.Point(6, 326);
+            this.XorElementSelectButton.Location = new System.Drawing.Point(7, 397);
             this.XorElementSelectButton.Name = "XorElementSelectButton";
             this.XorElementSelectButton.Size = new System.Drawing.Size(89, 17);
             this.XorElementSelectButton.TabIndex = 12;
@@ -279,7 +281,7 @@
             // OrElementSelectButton
             // 
             this.OrElementSelectButton.AutoSize = true;
-            this.OrElementSelectButton.Location = new System.Drawing.Point(6, 303);
+            this.OrElementSelectButton.Location = new System.Drawing.Point(7, 374);
             this.OrElementSelectButton.Name = "OrElementSelectButton";
             this.OrElementSelectButton.Size = new System.Drawing.Size(82, 17);
             this.OrElementSelectButton.TabIndex = 12;
@@ -292,7 +294,7 @@
             // AndElementSelectButton
             // 
             this.AndElementSelectButton.AutoSize = true;
-            this.AndElementSelectButton.Location = new System.Drawing.Point(6, 280);
+            this.AndElementSelectButton.Location = new System.Drawing.Point(6, 351);
             this.AndElementSelectButton.Name = "AndElementSelectButton";
             this.AndElementSelectButton.Size = new System.Drawing.Size(89, 17);
             this.AndElementSelectButton.TabIndex = 12;
@@ -305,7 +307,7 @@
             // NotElementSelectButton
             // 
             this.NotElementSelectButton.AutoSize = true;
-            this.NotElementSelectButton.Location = new System.Drawing.Point(6, 257);
+            this.NotElementSelectButton.Location = new System.Drawing.Point(6, 328);
             this.NotElementSelectButton.Name = "NotElementSelectButton";
             this.NotElementSelectButton.Size = new System.Drawing.Size(89, 17);
             this.NotElementSelectButton.TabIndex = 10;
@@ -318,7 +320,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 241);
+            this.label1.Location = new System.Drawing.Point(4, 312);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 9;
@@ -327,7 +329,7 @@
             // radioButton15
             // 
             this.radioButton15.AutoSize = true;
-            this.radioButton15.Location = new System.Drawing.Point(6, 145);
+            this.radioButton15.Location = new System.Drawing.Point(6, 207);
             this.radioButton15.Name = "radioButton15";
             this.radioButton15.Size = new System.Drawing.Size(51, 17);
             this.radioButton15.TabIndex = 8;
@@ -340,7 +342,7 @@
             // radioButton16
             // 
             this.radioButton16.AutoSize = true;
-            this.radioButton16.Location = new System.Drawing.Point(6, 101);
+            this.radioButton16.Location = new System.Drawing.Point(6, 138);
             this.radioButton16.Name = "radioButton16";
             this.radioButton16.Size = new System.Drawing.Size(55, 17);
             this.radioButton16.TabIndex = 7;
@@ -353,7 +355,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 129);
+            this.label2.Location = new System.Drawing.Point(3, 191);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 6;
@@ -362,7 +364,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 16);
+            this.label3.Location = new System.Drawing.Point(3, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 5;
@@ -371,7 +373,7 @@
             // radioButton17
             // 
             this.radioButton17.AutoSize = true;
-            this.radioButton17.Location = new System.Drawing.Point(6, 214);
+            this.radioButton17.Location = new System.Drawing.Point(6, 276);
             this.radioButton17.Name = "radioButton17";
             this.radioButton17.Size = new System.Drawing.Size(66, 17);
             this.radioButton17.TabIndex = 4;
@@ -384,7 +386,7 @@
             // radioButton18
             // 
             this.radioButton18.AutoSize = true;
-            this.radioButton18.Location = new System.Drawing.Point(6, 78);
+            this.radioButton18.Location = new System.Drawing.Point(6, 115);
             this.radioButton18.Name = "radioButton18";
             this.radioButton18.Size = new System.Drawing.Size(46, 17);
             this.radioButton18.TabIndex = 3;
@@ -397,7 +399,7 @@
             // radioButton19
             // 
             this.radioButton19.AutoSize = true;
-            this.radioButton19.Location = new System.Drawing.Point(6, 191);
+            this.radioButton19.Location = new System.Drawing.Point(6, 253);
             this.radioButton19.Name = "radioButton19";
             this.radioButton19.Size = new System.Drawing.Size(96, 17);
             this.radioButton19.TabIndex = 3;
@@ -410,7 +412,7 @@
             // radioButton20
             // 
             this.radioButton20.AutoSize = true;
-            this.radioButton20.Location = new System.Drawing.Point(6, 32);
+            this.radioButton20.Location = new System.Drawing.Point(6, 69);
             this.radioButton20.Name = "radioButton20";
             this.radioButton20.Size = new System.Drawing.Size(55, 17);
             this.radioButton20.TabIndex = 2;
@@ -421,7 +423,7 @@
             // radioButton21
             // 
             this.radioButton21.AutoSize = true;
-            this.radioButton21.Location = new System.Drawing.Point(6, 168);
+            this.radioButton21.Location = new System.Drawing.Point(6, 230);
             this.radioButton21.Name = "radioButton21";
             this.radioButton21.Size = new System.Drawing.Size(72, 17);
             this.radioButton21.TabIndex = 1;
@@ -434,7 +436,7 @@
             // 
             this.radioButton22.AutoSize = true;
             this.radioButton22.Checked = true;
-            this.radioButton22.Location = new System.Drawing.Point(6, 55);
+            this.radioButton22.Location = new System.Drawing.Point(6, 92);
             this.radioButton22.Name = "radioButton22";
             this.radioButton22.Size = new System.Drawing.Size(47, 17);
             this.radioButton22.TabIndex = 0;
@@ -707,6 +709,19 @@
             this.MenuItems.TabIndex = 4;
             this.MenuItems.Text = "menuStrip1";
             // 
+            // SpeakerSelectButton
+            // 
+            this.SpeakerSelectButton.AutoSize = true;
+            this.SpeakerSelectButton.Location = new System.Drawing.Point(6, 161);
+            this.SpeakerSelectButton.Name = "SpeakerSelectButton";
+            this.SpeakerSelectButton.Size = new System.Drawing.Size(65, 17);
+            this.SpeakerSelectButton.TabIndex = 14;
+            this.SpeakerSelectButton.TabStop = true;
+            this.SpeakerSelectButton.Tag = "Speaker";
+            this.SpeakerSelectButton.Text = "Speaker";
+            this.SpeakerSelectButton.UseVisualStyleBackColor = true;
+            this.SpeakerSelectButton.CheckedChanged += new System.EventHandler(this.ElementSelectButton_click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -788,6 +803,7 @@
         private System.Windows.Forms.RadioButton DownFilterSelectButton;
         private System.Windows.Forms.RadioButton UpFilterSelectButton;
         private System.Windows.Forms.Label FiltersLabel;
+        private System.Windows.Forms.RadioButton SpeakerSelectButton;
     }
 }
 
