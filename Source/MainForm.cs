@@ -148,6 +148,11 @@ namespace Electronic
             clearItem.ShortcutKeys = Keys.Control | Keys.C;
             settingsItem.DropDownItems.Add(clearItem);
 
+            var shrinkItem = new ToolStripMenuItem("Shrink");
+            shrinkItem.Click += (object sender, EventArgs e) => { grid = grid.Shrink(); ChangeScale(scale); };
+            shrinkItem.ShortcutKeys = Keys.Control | Keys.H;
+            settingsItem.DropDownItems.Add(shrinkItem);
+
             MenuItems.Items.Add(settingsItem);
 
             var speeditem = new ToolStripMenuItem("Speed");

@@ -115,5 +115,34 @@ namespace Electronic
             }
             return resizedGrid;
         }
+
+        public Grid Shrink()
+        {
+            int xUp = xsize, yUp = ysize, xDown = 0, yDown = 0;
+
+            for (int i = 0; i < xsize; i++)
+            {
+                for (int j = 0; j < ysize; j++)
+                {
+                    if (elements[i, j] != null)
+                    {
+                        xUp = Math.Min(xUp, i);
+                        yUp = Math.Min(yUp, j);
+                        xDown = Math.Max(xDown, i);
+                        yDown = Math.Max(yDown, j);
+                    }
+                }
+            }
+
+            Grid newGrid = new Grid(xDown - xUp + 1, yDown - yUp + 1);
+            for (int i = 0; i < newGrid.xsize; i++)
+            {
+                for (int j = 0; j < newGrid.ysize; j++)
+                {
+                    newGrid.SetElement(elements[xUp + i, yUp + j], i, j);
+                }
+            }
+            return newGrid;
+        }
     }
 }
