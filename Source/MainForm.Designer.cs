@@ -95,7 +95,7 @@
             this.mainGrid.BackColor = System.Drawing.Color.DimGray;
             this.mainGrid.Location = new System.Drawing.Point(3, 3);
             this.mainGrid.Name = "mainGrid";
-            this.mainGrid.Size = new System.Drawing.Size(2048, 2048);
+            this.mainGrid.Size = new System.Drawing.Size(8192, 8192);
             this.mainGrid.TabIndex = 0;
             this.mainGrid.TabStop = false;
             this.mainGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.mainGrid_Paint);
@@ -110,7 +110,7 @@
             this.gridContainer.Controls.Add(this.mainGrid);
             this.gridContainer.Location = new System.Drawing.Point(3, 3);
             this.gridContainer.Name = "gridContainer";
-            this.gridContainer.Size = new System.Drawing.Size(2054, 2054);
+            this.gridContainer.Size = new System.Drawing.Size(8198, 8198);
             this.gridContainer.TabIndex = 1;
             // 
             // splitContainer
