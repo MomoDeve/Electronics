@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -138,7 +138,7 @@ namespace Electronic
                     grid = grid.Resize(xsize, ysize);
                     ChangeScale(scale);
                 }
-                catch(Exception) { }
+                catch (Exception) { }
             };
             gridResizeItem.DropDownItems.Add(textbox);
             settingsItem.DropDownItems.Add(gridResizeItem);
@@ -171,7 +171,7 @@ namespace Electronic
             for (int i = 1; i < 8; i++)
             {
                 int k = i;
-                var scaleOption = new ToolStripMenuItem((100 / i).ToString() + '%');
+                var scaleOption = new ToolStripMenuItem(Math.Round((100.0 / Math.Pow(2, i - 1)), 1).ToString() + '%');
                 scaleOption.Click += (object sender, EventArgs e) => ChangeScale(k);
                 scaleGridSettings.DropDownItems.Add(scaleOption);
             }
@@ -193,12 +193,12 @@ namespace Electronic
 
             drawer.DrawGrid(g, defaultCellSize, scale);
 
-            if(drawLines)
+            if (drawLines)
             {
                 drawer.DrawLines(g, defaultCellSize, scale, p);
             }
 
-            if(gridLoaded)
+            if (gridLoaded && gridToAdd != null)
             {
                 GridDrawer.DrawLines(g, defaultCellSize, scale, new Pen(Color.Red, 2), gridToAdd.xsize, gridToAdd.ysize, loadX, loadY);
             }
@@ -264,11 +264,10 @@ namespace Electronic
         private void mainGrid_MouseDown(object sender, MouseEventArgs e)
         {
             fileSaved = false;
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 gridToAdd = null;
                 gridLoaded = false;
-                return;
             }
 
             int x = e.X * scale;
@@ -277,7 +276,7 @@ namespace Electronic
             y -= y % defaultCellSize;
             if (x >= (grid.xsize * defaultCellSize) || y >= (grid.ysize * defaultCellSize)) return;
 
-            if (gridLoaded)
+            if (gridLoaded && gridToAdd != null)
             {
                 gridLoaded = false;
                 PlaceGridOnField(x, y);
@@ -286,7 +285,7 @@ namespace Electronic
             }
 
             IElement element = null;
-            if (drawObjectType != null)
+            if (drawObjectType != null && e.Button != MouseButtons.Right)
             {
                 element = (IElement)Activator.CreateInstance(drawObjectType);
             }
@@ -294,7 +293,7 @@ namespace Electronic
             int gridX = x / defaultCellSize;
             int gridY = y / defaultCellSize;
 
-            if(grid.elements[gridX, gridY] != null && element != null)
+            if (grid.elements[gridX, gridY] != null && element != null)
             {
                 grid.elements[gridX, gridY].Click();
             }
@@ -340,7 +339,7 @@ namespace Electronic
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(!fileSaved)
+            if (!fileSaved)
             {
                 SaveAsFile(sender, e);
             }
@@ -348,16 +347,21 @@ namespace Electronic
 
         private void PlaceGridOnField(int x, int y)
         {
-            for(int i = 0; i < gridToAdd.xsize; i++)
+            int xPos = x / defaultCellSize, yPos = y / defaultCellSize;
+
+            grid = grid.Resize(Math.Max(xPos + gridToAdd.xsize, grid.xsize), Math.Max(yPos + gridToAdd.ysize, grid.ysize));
+            ChangeScale(scale);
+
+            for (int i = 0; i < gridToAdd.xsize; i++)
             {
-                for(int j = 0; j < gridToAdd.ysize; j++)
+                for (int j = 0; j < gridToAdd.ysize; j++)
                 {
                     IElement element = null;
                     if (gridToAdd.elements[i, j] != null)
                     {
                         element = (IElement)Activator.CreateInstance(gridToAdd.elements[i, j]);
                     }
-                    grid.SetElement(element, x / defaultCellSize + i, y / defaultCellSize + j);
+                    grid.SetElement(element, xPos + i, yPos + j);
                 }
             }
         }
