@@ -9,4 +9,6 @@ Electronics App for logic circuts simulation
 
 - Scheme examples can be found in example folder
 
+![preview](https://user-images.githubusercontent.com/40578274/57950465-fdacfc00-78ef-11e9-88b2-1f75bbd62f83.png)
+
 ![preview](https://user-images.githubusercontent.com/40578274/57950337-a575fa00-78ef-11e9-8cf8-cd81f4ddeef9.png)
