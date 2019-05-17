@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -357,9 +357,9 @@ namespace Electronic
                 for (int j = 0; j < gridToAdd.ysize; j++)
                 {
                     IElement element = null;
-                    if (gridToAdd.elements[i, j] != null)
+                    if (gridToAdd.elements[i, j] != "null")
                     {
-                        element = (IElement)Activator.CreateInstance(gridToAdd.elements[i, j]);
+                        element = (IElement)Activator.CreateInstance(Type.GetType("Electronic." + gridToAdd.elements[i, j]));
                     }
                     grid.SetElement(element, xPos + i, yPos + j);
                 }

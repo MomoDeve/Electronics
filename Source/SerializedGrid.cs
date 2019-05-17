@@ -6,19 +6,19 @@ namespace Electronic
     class SerializedGrid
     {
         public int xsize, ysize;
-        public Type[,] elements;
+        public string[,] elements;
 
         public SerializedGrid()
         {
             xsize = ysize = 0;
-            elements = new Type[xsize, ysize];
+            elements = new string[xsize, ysize];
         }
 
         public SerializedGrid(Grid grid)
         {
             xsize = grid.xsize;
             ysize = grid.ysize;
-            elements = new Type[xsize, ysize];
+            elements = new string[xsize, ysize];
             for (int i = 0; i < xsize; i++)
             {
                 for (int j = 0; j < ysize; j++)
@@ -29,7 +29,7 @@ namespace Electronic
                     }
                     else
                     {
-                        elements[i, j] = grid.elements[i, j].GetType();
+                        elements[i, j] = grid.elements[i, j].GetType().Name;
                     }
                 }
             }
