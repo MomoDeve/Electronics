@@ -313,6 +313,8 @@ namespace Electronic
             int gridX = x / defaultCellSize;
             int gridY = y / defaultCellSize;
 
+            if (gridX < 0 || gridX >= grid.xsize || gridY < 0 || gridY >= grid.ysize) return;
+
             if (grid.elements[gridX, gridY] != null && element != null)
             {
                 grid.elements[gridX, gridY].Click();
