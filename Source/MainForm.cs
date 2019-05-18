@@ -13,6 +13,7 @@ namespace Electronic
 
         int scale = 1;
         bool drawLines = true;
+        bool mousePressed = false;
         bool updateEnabled = true;
         bool gridLoaded = false;
         int loadX, loadY;
@@ -288,6 +289,7 @@ namespace Electronic
             if (drawObjectType != null && e.Button != MouseButtons.Right)
             {
                 element = (IElement)Activator.CreateInstance(drawObjectType);
+                mousePressed = true;
             }
 
             int gridX = x / defaultCellSize;
@@ -334,6 +336,12 @@ namespace Electronic
             loadY = e.Y;
             loadX -= loadX % (defaultCellSize / scale);
             loadY -= loadY % (defaultCellSize / scale);
+
+            if(mousePressed)
+            {
+                mainGrid_MouseDown(null, e);
+            }
+
             mainGrid.Invalidate();
         }
 
@@ -343,6 +351,11 @@ namespace Electronic
             {
                 SaveAsFile(sender, e);
             }
+        }
+
+        private void mainGrid_MouseUp(object sender, MouseEventArgs e)
+        {
+            mousePressed = false;
         }
 
         private void PlaceGridOnField(int x, int y)
