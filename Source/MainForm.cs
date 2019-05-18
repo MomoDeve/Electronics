@@ -41,36 +41,43 @@ namespace Electronic
 
             var fileItem = new ToolStripMenuItem("File");
 
-            var newFileItem = new ToolStripMenuItem("New file");
+            var newFileItem = new ToolStripMenuItem("New file")
+            {
+                ShortcutKeys = Keys.Control | Keys.F
+            };
             newFileItem.Click += (object sender, EventArgs e) =>
             {
                 SaveFile(sender, e);
                 lastFileDirectory = null;
                 grid.Clear();
             };
-            newFileItem.ShortcutKeys = Keys.Control | Keys.F;
             fileItem.DropDownItems.Add(newFileItem);
 
 
-            var saveAsItem = new ToolStripMenuItem("SaveAs");
+            var saveAsItem = new ToolStripMenuItem("SaveAs")
+            {
+                ShortcutKeys = Keys.Control | Keys.T
+            };
             saveAsItem.Click += SaveAsFile;
-            saveAsItem.ShortcutKeys = Keys.Control | Keys.T;
             fileItem.DropDownItems.Add(saveAsItem);
 
-            var saveItem = new ToolStripMenuItem("Save");
+            var saveItem = new ToolStripMenuItem("Save")
+            {
+                ShortcutKeys = Keys.Control | Keys.S
+            };
             saveItem.Click += SaveFile;
-            saveItem.ShortcutKeys = Keys.Control | Keys.S;
             fileItem.DropDownItems.Add(saveItem);
 
             var loadItem = new ToolStripMenuItem("Load");
             loadItem.Click += (object sender, EventArgs e) =>
             {
                 Stream fileStream;
-                OpenFileDialog loadFileDialog = new OpenFileDialog();
-
-                loadFileDialog.Filter = "(*.elc)|*.elc";
-                loadFileDialog.FilterIndex = 2;
-                loadFileDialog.RestoreDirectory = true;
+                OpenFileDialog loadFileDialog = new OpenFileDialog()
+                {
+                    Filter = "(*.elc)|*.elc",
+                    FilterIndex = 2,
+                    RestoreDirectory = true
+                };
 
                 if (loadFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -103,8 +110,10 @@ namespace Electronic
 
             ToolStripMenuItem settingsItem = new ToolStripMenuItem("Settings");
 
-            var updateItem = new ToolStripMenuItem("Auto-update");
-            updateItem.Checked = true;
+            var updateItem = new ToolStripMenuItem("Auto-update")
+            {
+                Checked = true
+            };
             updateItem.Click += (object sender, EventArgs e) =>
             {
                 var element = (ToolStripMenuItem)sender;
@@ -114,8 +123,10 @@ namespace Electronic
             settingsItem.DropDownItems.Add(updateItem);
 
 
-            var drawLinesItem = new ToolStripMenuItem("Grid");
-            drawLinesItem.Checked = true;
+            var drawLinesItem = new ToolStripMenuItem("Grid")
+            {
+                Checked = true
+            };
             drawLinesItem.Click += (object sender, EventArgs e) =>
             {
                 var element = (ToolStripMenuItem)sender;
@@ -127,8 +138,10 @@ namespace Electronic
 
 
             var gridResizeItem = new ToolStripMenuItem("Size");
-            var textbox = new ToolStripTextBox("Enter Sizes:");
-            textbox.Text = string.Format("Xsize Ysize");
+            var textbox = new ToolStripTextBox("Enter Sizes:")
+            {
+                Text = "Xsize Ysize"
+            };
             textbox.LostFocus += (object sender, EventArgs e) =>
             {
                 string[] sizes = textbox.Text.Split(";, ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -144,14 +157,18 @@ namespace Electronic
             gridResizeItem.DropDownItems.Add(textbox);
             settingsItem.DropDownItems.Add(gridResizeItem);
 
-            var clearItem = new ToolStripMenuItem("Clear");
+            var clearItem = new ToolStripMenuItem("Clear")
+            {
+                ShortcutKeys = Keys.Control | Keys.C
+            };
             clearItem.Click += (object sender, EventArgs e) => { grid.Clear(); mainGrid.Invalidate(); };
-            clearItem.ShortcutKeys = Keys.Control | Keys.C;
             settingsItem.DropDownItems.Add(clearItem);
 
-            var shrinkItem = new ToolStripMenuItem("Shrink");
+            var shrinkItem = new ToolStripMenuItem("Shrink")
+            {
+                ShortcutKeys = Keys.Control | Keys.H
+            };
             shrinkItem.Click += (object sender, EventArgs e) => { grid = grid.Shrink(); ChangeScale(scale); };
-            shrinkItem.ShortcutKeys = Keys.Control | Keys.H;
             settingsItem.DropDownItems.Add(shrinkItem);
 
             MenuItems.Items.Add(settingsItem);
@@ -265,6 +282,8 @@ namespace Electronic
         private void mainGrid_MouseDown(object sender, MouseEventArgs e)
         {
             fileSaved = false;
+            mousePressed = true;
+
             if (e.Button == MouseButtons.Right)
             {
                 gridToAdd = null;
@@ -289,7 +308,6 @@ namespace Electronic
             if (drawObjectType != null && e.Button != MouseButtons.Right)
             {
                 element = (IElement)Activator.CreateInstance(drawObjectType);
-                mousePressed = true;
             }
 
             int gridX = x / defaultCellSize;
