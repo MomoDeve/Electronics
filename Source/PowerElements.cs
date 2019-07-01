@@ -40,30 +40,35 @@ namespace Electronic
 
     class Timer : PowerElement
     {
-        bool memory, pushed, energyNotRecieved;
+        bool holdingEnergy, energyPushed, readyToRelease;
 
-        public override string imagePath => isOn ? "timerP.png" : "timerC.png";
-
-        public override bool isOn => pushed;
+        public override string imagePath => energyPushed ? "timerP.png" : "timerC.png";
 
         public override void PushEnergy()
         {
-            if (memory)
+            if(!holdingEnergy && energyPushed)
             {
+                readyToRelease = false;
+                energyPushed = false;
+            }
+            else if(holdingEnergy && !readyToRelease)
+            {
+                readyToRelease = true;
+                holdingEnergy = false;
+            }
+            else if (readyToRelease)
+            {
+                isOn = true;
                 base.PushEnergy();
+                isOn = false;
+                energyPushed = true;
+                holdingEnergy = false;
             }
-            pushed = memory;
-            if (energyNotRecieved)
-            {
-                memory = false;
-            }
-            energyNotRecieved = true;
         }
 
         public override void RecieveEnergy(IElement element, RelativePosition elementPosition)
         {
-            memory = true;
-            energyNotRecieved = false;
+            holdingEnergy = true;
         }
     }
 }
