@@ -16,6 +16,7 @@ namespace Electronic
         bool mousePressed = false;
         bool updateEnabled = true;
         bool gridLoaded = false;
+        bool formLoaded = false;
         int loadX, loadY;
         bool fileSaved = false;
         string lastFileDirectory = null;
@@ -30,14 +31,28 @@ namespace Electronic
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            DoubleBuffered = true;
             BackgroundColor = Color.FromArgb(33, 33, 33);
+            mainGrid.BackColor = BackgroundColor;
 
             int numOfRows = 64;
             int numOfColumns = 64;
             grid = new Grid(numOfColumns, numOfRows);
 
             drawer = new GridDrawer(grid);
-            drawer.AddFolder(resourcePath, defaultCellSize, scale);
+            try
+            {
+                drawer.AddFolder(resourcePath, defaultCellSize, scale);
+            }
+            catch (System.IO.DirectoryNotFoundException)
+            {
+                MessageBox.Show("директория не найдена: " + resourcePath, "Произошла ошибка при открытии Electronics");
+                Close();
+            }
 
             var fileItem = new ToolStripMenuItem("File");
 
@@ -45,9 +60,9 @@ namespace Electronic
             {
                 ShortcutKeys = Keys.Control | Keys.F
             };
-            newFileItem.Click += (object sender, EventArgs e) =>
+            newFileItem.Click += (object o, EventArgs args) =>
             {
-                SaveFile(sender, e);
+                SaveFile(o, args);
                 lastFileDirectory = null;
                 grid.Clear();
             };
@@ -69,7 +84,7 @@ namespace Electronic
             fileItem.DropDownItems.Add(saveItem);
 
             var loadItem = new ToolStripMenuItem("Load");
-            loadItem.Click += (object sender, EventArgs e) =>
+            loadItem.Click += (object o, EventArgs args) =>
             {
                 Stream fileStream;
                 OpenFileDialog loadFileDialog = new OpenFileDialog()
@@ -114,9 +129,9 @@ namespace Electronic
             {
                 Checked = true
             };
-            updateItem.Click += (object sender, EventArgs e) =>
+            updateItem.Click += (object o, EventArgs args) =>
             {
-                var element = (ToolStripMenuItem)sender;
+                var element = (ToolStripMenuItem)o;
                 element.Checked = updateEnabled = !element.Checked;
             };
             updateItem.ShortcutKeys = Keys.Control | Keys.U;
@@ -127,9 +142,9 @@ namespace Electronic
             {
                 Checked = true
             };
-            drawLinesItem.Click += (object sender, EventArgs e) =>
+            drawLinesItem.Click += (object o, EventArgs args) =>
             {
-                var element = (ToolStripMenuItem)sender;
+                var element = (ToolStripMenuItem)o;
                 element.Checked = drawLines = !element.Checked;
                 mainGrid.Invalidate();
             };
@@ -142,7 +157,7 @@ namespace Electronic
             {
                 Text = "Xsize Ysize"
             };
-            textbox.LostFocus += (object sender, EventArgs e) =>
+            textbox.LostFocus += (object o, EventArgs args) =>
             {
                 string[] sizes = textbox.Text.Split(";, ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 try
@@ -161,14 +176,14 @@ namespace Electronic
             {
                 ShortcutKeys = Keys.Control | Keys.C
             };
-            clearItem.Click += (object sender, EventArgs e) => { grid.Clear(); mainGrid.Invalidate(); };
+            clearItem.Click += (object o, EventArgs args) => { grid.Clear(); mainGrid.Invalidate(); };
             settingsItem.DropDownItems.Add(clearItem);
 
             var shrinkItem = new ToolStripMenuItem("Shrink")
             {
                 ShortcutKeys = Keys.Control | Keys.H
             };
-            shrinkItem.Click += (object sender, EventArgs e) => { grid = grid.Shrink(); ChangeScale(scale); };
+            shrinkItem.Click += (object o, EventArgs args) => { grid = grid.Shrink(); ChangeScale(scale); };
             settingsItem.DropDownItems.Add(shrinkItem);
 
             MenuItems.Items.Add(settingsItem);
@@ -179,7 +194,7 @@ namespace Electronic
             {
                 int k = 1000 / (int)Math.Pow(2, i);
                 var speedOption = new ToolStripMenuItem(k.ToString() + " ms");
-                speedOption.Click += (object sender, EventArgs e) => mainTimer.Interval = k;
+                speedOption.Click += (object o, EventArgs args) => mainTimer.Interval = k;
                 speeditem.DropDownItems.Add(speedOption);
             }
             MenuItems.Items.Add(speeditem);
@@ -190,17 +205,12 @@ namespace Electronic
             {
                 int k = i;
                 var scaleOption = new ToolStripMenuItem(Math.Round((100.0 / Math.Pow(2, i - 1)), 1).ToString() + '%');
-                scaleOption.Click += (object sender, EventArgs e) => ChangeScale(k);
+                scaleOption.Click += (object o, EventArgs args) => ChangeScale(k);
                 scaleGridSettings.DropDownItems.Add(scaleOption);
             }
 
             MenuItems.Items.Add(scaleGridSettings);
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            DoubleBuffered = true;
-            mainGrid.BackColor = BackgroundColor;
+            formLoaded = true;
         }
 
         private void mainGrid_Paint(object sender, PaintEventArgs e)
@@ -367,7 +377,7 @@ namespace Electronic
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!fileSaved)
+            if (!fileSaved && formLoaded)
             {
                 SaveAsFile(sender, e);
             }
